@@ -6,7 +6,7 @@ license: Apache-2.0
 metadata:
   hermes:
     tags: [hermes, plugins, hooks, extension, runtime, customization]
-    related_skills: [hermes-config-management, hermes-skill-operations, hermes-tui-customization]
+    related_skills: [building-deterministic-skills, hermes-config-management, hermes-skill-operations, hermes-tui-customization]
 ---
 
 # Extend Hermes without forking
@@ -67,7 +67,12 @@ tool, slash command, or CLI subcommand.
    models, and which plugins load (`plugins.enabled` / `plugins.disabled`).
    Edited via the CLI.
 3. SKILL — procedural markdown in `~/.hermes/skills/<name>/SKILL.md`. Overlays
-   how a task is done; no executable override of the runtime.
+   how a task is done; no executable override of the runtime. To author a new
+   skill deterministically (so weak models can execute it) and validate it
+   against Hermes, use the `building-deterministic-skills` skill — its
+   methodology, skeleton, and validators. Repo:
+   https://github.com/srinitude/building-deterministic-skills
+   (install: `hermes skills install srinitude/building-deterministic-skills/. --yes`).
 4. ENV VARS — flip behaviors at startup (e.g. `HERMES_BUNDLED_PLUGINS`,
    `HERMES_ENABLE_PROJECT_PLUGINS`, `HERMES_PLUGINS_DEBUG`).
 5. ENTRY-POINT PIP PLUGIN — a pip package exposing the
