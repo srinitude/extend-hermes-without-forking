@@ -3,6 +3,7 @@ name: extend-hermes-without-forking
 description: >
   Extend or override Hermes runtime behavior using the supported plugin, config, skill, and env layers in ~/.hermes — never by editing the Nous-deployed package. Use when the user says "extend Hermes", "add a Hermes plugin", "override Hermes behavior", "add a slash command", "add a hermes CLI subcommand", "hook a tool call", "customize Hermes without forking", or "change Hermes without touching the package", even if they do not say "plugin" explicitly. Do NOT use for claude-code (Anthropic's claude CLI delegation), hermes-config-management (pure config.yaml audits), hermes-skill-operations (installing/updating skill packages), or hermes-tui-customization (TUI chrome) tasks.
 license: Apache-2.0
+version: 0.1.0
 metadata:
   hermes:
     tags: [hermes, plugins, hooks, extension, runtime, customization]
