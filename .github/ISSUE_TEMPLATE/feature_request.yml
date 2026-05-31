@@ -1,0 +1,26 @@
+name: Feature or content request
+description: Suggest an improvement to the skill content, references, or validators
+title: "[feat]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's missing or could be better?
+      description: Describe the gap. Source-grounded suggestions are best.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What should the skill say or do instead?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source grounding
+      description: Cite the Hermes source path(s) that support the change, if applicable.
+    validations:
+      required: false

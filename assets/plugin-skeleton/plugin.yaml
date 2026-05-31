@@ -1,0 +1,4 @@
+name: plugin-skeleton
+version: 1.0.0
+description: "Minimal valid Hermes user plugin skeleton. Rename to your plugin name before use."
+author: ""

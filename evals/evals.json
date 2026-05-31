@@ -1,0 +1,31 @@
+{
+  "skill": "extend-hermes-without-forking",
+  "trigger_cases": [
+    {"prompt": "I want to extend Hermes with a new plugin that hooks tool calls", "should_trigger": true},
+    {"prompt": "Add a hermes CLI subcommand without forking the package", "should_trigger": true},
+    {"prompt": "How do I override Hermes behavior without editing the deployed package?", "should_trigger": true},
+    {"prompt": "Register a new slash command in Hermes", "should_trigger": true},
+    {"prompt": "Customize Hermes without touching the Nous package", "should_trigger": true},
+    {"prompt": "Hook into pre_llm_call to inject context", "should_trigger": true}
+  ],
+  "anti_trigger_cases": [
+    {"prompt": "Delegate this refactor to Anthropic's claude CLI", "should_trigger": false, "reason": "claude-code skill"},
+    {"prompt": "Audit and clean up my config.yaml", "should_trigger": false, "reason": "hermes-config-management"},
+    {"prompt": "Install and update a skill package from a git repo", "should_trigger": false, "reason": "hermes-skill-operations"},
+    {"prompt": "Change the TUI status bar colors", "should_trigger": false, "reason": "hermes-tui-customization"}
+  ],
+  "functional_cases": [
+    {
+      "name": "skeleton-plugin-validates",
+      "command": "python3 scripts/validate-hermes-plugin.py assets/plugin-skeleton",
+      "expect_exit": 0,
+      "expect_contains": "PASS_PLUGIN"
+    },
+    {
+      "name": "frontmatter-valid",
+      "command": "python3 scripts/check-skill-frontmatter.py",
+      "expect_exit": 0,
+      "expect_contains": "PASS_FRONTMATTER"
+    }
+  ]
+}

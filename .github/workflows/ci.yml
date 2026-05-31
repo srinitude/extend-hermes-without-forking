@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate skill (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Frontmatter
+        run: python3 scripts/check-skill-frontmatter.py
+
+      - name: Dumb-model readability
+        run: python3 scripts/check-dumb-model-readability.py SKILL.md
+
+      - name: No dead links
+        run: python3 scripts/check-no-dead-links.py
+
+      - name: Determinism (every script --self-test, twice, byte-identical)
+        run: python3 scripts/check-determinism.py
+
+      - name: Plugin skeleton shape
+        run: python3 scripts/validate-hermes-plugin.py assets/plugin-skeleton
+
+      - name: Evals JSON is valid
+        run: python3 -c "import json; json.load(open('evals/evals.json'))"
+
+  lint:
+    name: Ruff lint (scripts)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Ruff check
+        run: ruff check scripts/
